@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Gincana Java</title>
+    </h:head>
+    <h:body>
+        <p:growl id="growl" sticky="false" showDetail="true" life="3000" />
+        <div width="100%" align="center">
+            <h1>Gincana de Programação</h1>
+
+            <p:graphicImage value="imgs/java.png"/>
+            <br/>
+            <br/>
+            <br/>
+            <h:form id="form">   
+
+                <h:panelGroup rendered="#{loginController.grupo.logado}">
+                    <h3>
+                        <h:outputLabel value="#{loginController.grupo.nome}" />
+                    </h3>
+
+                    <p:commandButton value="Ver Pergunta" action="pergunta?faces-redirect=true" ajax="false"/>
+                    <br/>
+                    <br/>
+                    <h:panelGroup rendered="#{loginController.grupo.admin}">
+                        <p:commandButton value="Cad. Pergunta" action="cad_pergunta?faces-redirect=true" ajax="false"/>
+                        <br/>
+                        <br/>
+                    </h:panelGroup>
+                    <p:commandButton value="Ver Placar" action="placar?faces-redirect=true" ajax="false"/>
+                    <br/>
+                    <br/>
+                    <p:commandButton value="Sair" update="form" actionListener="#{loginController.logout}"/>
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{!loginController.grupo.logado}">
+                    <p:commandButton value="ENTRAR" onclick="PF('dlg').show();"/>
+
+                    <p:dialog header="Acesso" widgetVar="dlg" resizable="false">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputLabel for="grupo" value="Grupo:" />
+                            <p:inputText id="grupo" value="#{loginController.grupo.nome}" required="true" label="grupo" />
+
+                            <h:outputLabel for="senha" value="Senha:" />
+                            <p:password id="senha" value="#{loginController.grupo.senha}" required="true" label="senha" />
+
+                            <f:facet name="footer">
+                                <p:commandButton value="Entrar" update="growl,form" actionListener="#{loginController.login}"/>
+                            </f:facet>  
+                        </h:panelGrid>
+                    </p:dialog>
+                </h:panelGroup>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+

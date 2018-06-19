@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Gincana Java</title>
+    </h:head>
+
+    <h:body>
+        <p:growl id="growl" sticky="false" showDetail="true" life="3000" />
+        <div width="100%" align="center">
+            <h:form id="frm">
+                <h:panelGroup rendered="#{loginController.grupo.logado}">
+                    <h3>PLACAR GERAL</h3>
+                    <p:dataTable var="placar" value="#{placarController.placar}">
+                        <p:column headerText="Grupo">
+                            <h:outputText value="#{placar.grupo.nome}" />
+                        </p:column>
+
+                        <p:column headerText="Pontos">
+                            <h:outputText value="#{placar.pontos}" />
+                        </p:column>
+                    </p:dataTable>
+                </h:panelGroup>
+            </h:form>
+        </div>
+    </h:body>
+</html>
+
